@@ -90,7 +90,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\Sobol\qmc_sobol_niederreiter.cpp" />
     <ClCompile Include="Brdf.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -98,15 +97,16 @@
     <ClCompile Include="RenderEngine.cpp" />
     <ClCompile Include="Sampling.cpp" />
     <ClCompile Include="Scene.cpp" />
+    <ClCompile Include="Sobol\qmc_sobol_niederreiter.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\Sobol\qmc_sobol_niederreiter.h" />
     <ClInclude Include="Brdf.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Math.h" />
     <ClInclude Include="RenderEngine.h" />
     <ClInclude Include="Sampling.h" />
     <ClInclude Include="Scene.h" />
+    <ClInclude Include="Sobol\qmc_sobol_niederreiter.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

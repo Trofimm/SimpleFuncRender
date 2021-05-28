@@ -1,6 +1,5 @@
 ﻿#include "Math.h"
 #include "Scene.h"
-//#include "../Sobol/qmc_sobol_niederreiter.h"
 
 /////////////////////////////////////////////////////////
 

@@ -1,6 +1,6 @@
 #pragma once
 #include "Math.h"
-#include "../Sobol/qmc_sobol_niederreiter.h"
+#include "Sobol/qmc_sobol_niederreiter.h"
 
 ////////////////////////////////////////////////////////////////////////
 
