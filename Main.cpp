@@ -9,8 +9,8 @@
 
 //////////////////////////////////////////////////////////////////////
 
-  extern USHORT WINDOW_W = 800;
-  extern USHORT WINDOW_H = 800;
+extern USHORT WINDOW_W = 800;
+extern USHORT WINDOW_H = 800;
 
 int main(int argc, char ** argv)
 {  
