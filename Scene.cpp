@@ -16,6 +16,24 @@ float3 Scene_plane(std::vector<float>& a_rnd)
 }
 
 
+
+float3 Scene_sphere(std::vector<float>& a_rnd)
+{
+  const float2 rnd = { a_rnd[0], a_rnd[1] };
+  float3 deviation;
+
+  const float u = rnd.x * TWOPI - PI;
+  const float v = rnd.y * PI - HALFPI;
+
+  deviation.x = cos(u) * cos(v);
+  deviation.y = sin(u) * cos(v);
+  deviation.z = sin(v);
+
+  return deviation;
+}
+
+
+
 float3 Scene_volumeCube(std::vector<float>& a_rnd)
 {
   float3 deviation;
@@ -116,15 +134,63 @@ float3 Scene_SeaShell(std::vector<float>& a_rnd)
   const float2 rnd = { a_rnd[0], a_rnd[1] };
   float3 deviation;
 
-  const float u = rnd.x * 8 * PI;
+  const float u = rnd.x * 8.0F * PI;
   const float v = rnd.y * TWOPI - PI;
 
   deviation.x = u * cos(u) * (cos(v) + 1.0F);
   deviation.y = u * sin(v) - powf((u + 3) / 8.0F * PI, 2) + 100.0F;
   deviation.z = u * sin(u) * (cos(v) + 1.0F);
 
+  deviation.y -= 20.0F; // offset in center coord
+
   return deviation * 0.02F;
 }
 
 
+float3 Scene_Shamrock(std::vector<float>& a_rnd)
+{
+  const float2 rnd = { a_rnd[0], a_rnd[1] };
+  float3 deviation;
 
+  const float u = rnd.x * 4.0F * PI - TWOPI;
+  const float v = rnd.y * TWOPI - PI;
+
+  deviation.x = cos(u) * cos(v) + 3.0F * cos(u) * (1.5F + sin(1.5F * u) / 2.0F);
+  deviation.y = sin(u) * cos(v) + 3.0F * sin(u) * (1.5F + sin(1.5F * u) / 2.0F);
+  deviation.z = sin(v) + 2.0F * cos(1.5F * u);
+
+  return deviation * 0.15F;
+}
+
+
+float3 Scene_DiniSurface(std::vector<float>& a_rnd)
+{
+  const float2 rnd = { a_rnd[0], a_rnd[1] };
+  float3 deviation;
+
+  const float u = rnd.x * 4.0F * PI;
+  const float v = rnd.y * 2.0F + 0.001F;
+
+  deviation.x = cos(u) * sin(v);
+  deviation.y = sin(u) * sin(v);
+  deviation.z = cos(v) + log(tan(v / 2.0F)) + 0.2F * u - 4.0F;
+
+  deviation.z += 4.0F; // offset in center coord
+
+  return deviation * 0.5F;
+}
+
+float3 Scene_Surface01(std::vector<float>& a_rnd)
+{
+  const float2 rnd = { a_rnd[0], a_rnd[1] };
+  float3 deviation;
+
+  const float u = rnd.x * (2.0F + PI) - PI;
+  const float v = rnd.y * TWOPI - PI;
+
+  deviation.x = u * sin(v);
+  deviation.y = u * cos(v);
+  deviation.z = u * sin(u) * sin(u);
+  
+  return deviation * 0.3F;
+}
