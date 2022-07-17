@@ -1,27 +1,29 @@
 #include <iostream>
 #include <cstdlib>
 #include <cmath>
-#include <vector>
 
-#include "freeglut/include/GL/freeglut.h"
 #include "RenderEngine.h"
-
+#include "Viewport.h"
+#include "FreeglutDraw.h"
 
 //////////////////////////////////////////////////////////////////////
 
 extern USHORT WINDOW_W = 800;
-extern USHORT WINDOW_H = 800;
+extern USHORT WINDOW_H = 600;
 
 int main(int argc, char ** argv)
 {  
   Scene scene;
-  scene.LoadScene(Scene_SeaShell);
+  scene.LoadScene(Scene_sphere);
   
   const uint32_t maxSamples = 100000;
 
-  RenderSettings rendSett(WINDOW_W, WINDOW_H, maxSamples, SamplingMethod::SOBOL);
-  RenderEngine   render(rendSett, scene);  
-  render.Render();
+  RenderSettings   rendSett(WINDOW_W, WINDOW_H, maxSamples, SamplingMethod::SOBOL);
+  ViewportSettings viewSett(WINDOW_W, WINDOW_H);
+
+  RenderFunction renderFunc(rendSett, scene, G_RESULT_POINTS);
+  Viewport viewport(viewSett, renderFunc);
+  viewport.Draw();
 
 
   glutInit(&argc, argv);

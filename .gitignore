@@ -38,5 +38,8 @@ Debug/
 
 # Exception
 !freeglut.dll
+!freeglutd.dll
 !freeglut.lib
+!freeglutd.lib
 !freeglut_static.lib
+!freeglut_staticd.lib
