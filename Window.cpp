@@ -1,8 +1,12 @@
-#include "FreeglutDraw.h"
 #include "Camera.h"
+#include "Window.h"
 
 //////////////////////////////////////////////////////////////////////////
 
+extern USHORT WINDOW_W = 800;
+extern USHORT WINDOW_H = 600;
+
+extern std::vector<float3> G_RESULT_POINTS(0);
 
 
 void DrawPoints(const std::vector<float3>& a_points)
@@ -16,7 +20,7 @@ void DrawPoints(const std::vector<float3>& a_points)
 
 
 
-void DrawObjects(std::vector<float3> points)
+void DrawObjects(const std::vector<float3>& points)
 {
 	// stars: to simulate infinite distance,
 	//        translate the sphere of stars to the eye

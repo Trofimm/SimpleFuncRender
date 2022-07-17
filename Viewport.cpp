@@ -6,7 +6,8 @@
 
 Viewport::Viewport(ViewportSettings& viewSett, IRenderEngine& rendEngine):
   m_viewSett(viewSett),
-  m_rendEngine(rendEngine) {}
+  m_rendEngine(rendEngine)
+{}
 
 
 

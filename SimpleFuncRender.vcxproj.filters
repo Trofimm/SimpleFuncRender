@@ -23,6 +23,9 @@
     <Filter Include="BRDF">
       <UniqueIdentifier>{92ae95d0-af2b-4a0e-be94-47e27faf78bd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Window">
+      <UniqueIdentifier>{11794ec3-5ca1-4508-a134-766150295a4f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="RenderEngine.cpp">
@@ -50,8 +53,8 @@
       <Filter>BRDF</Filter>
     </ClCompile>
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="FreeglutDraw.cpp">
-      <Filter>Viewport</Filter>
+    <ClCompile Include="Window.cpp">
+      <Filter>Window</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -85,8 +88,8 @@
     <ClInclude Include="Math.h">
       <Filter>Math</Filter>
     </ClInclude>
-    <ClInclude Include="FreeglutDraw.h">
-      <Filter>Viewport</Filter>
+    <ClInclude Include="Window.h">
+      <Filter>Window</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -13,8 +13,8 @@ struct ViewportSettings
     m_width(width),
     m_height(height) {}
 
-  USHORT m_width  = 800;
-  USHORT m_height = 800;  
+  USHORT m_width;
+  USHORT m_height;  
 };
 
 

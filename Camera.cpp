@@ -43,7 +43,7 @@ static void quatidentity(GLfloat* q)
 
 
 // copy a rotation matrix
-static void quatcopy(GLfloat* dst, GLfloat* src)
+static void quatcopy(GLfloat* dst, const GLfloat* src)
 {
   dst[0] = src[0]; dst[1] = src[1]; dst[2] = src[2];
   dst[4] = src[4]; dst[5] = src[5]; dst[6] = src[6];
@@ -52,7 +52,7 @@ static void quatcopy(GLfloat* dst, GLfloat* src)
 
 
 // multiply two rotation matrices
-static void quatnext(GLfloat* dest, GLfloat* left, GLfloat* right)
+static void quatnext(GLfloat* dest, const GLfloat* left, const GLfloat* right)
 {
   dest[0]  = left[0] * right[0] + left[1] * right[4] + left[2] * right[8];
   dest[1]  = left[0] * right[1] + left[1] * right[5] + left[2] * right[9];
@@ -80,7 +80,7 @@ static vec3 edge_coords(vec3 m, Camera& a_cam)
   // the plane outside the sphere toward the eye-axis.
   float ac = (a * c);
   float c2 = (c * c);
-  float q = (0.0 - ac - sqrt(ac * ac - c2 * ((a * a) - a_cam.ab_sphere2))) / c2;
+  float q = (0.0F - ac - sqrt(ac * ac - c2 * ((a * a) - a_cam.ab_sphere2))) / c2;
 
   return (a + (c * q)).unit();
 }
@@ -89,7 +89,9 @@ static vec3 edge_coords(vec3 m, Camera& a_cam)
 // find the intersection with the sphere
 static vec3 sphere_coords(GLdouble mx, GLdouble my, Camera& a_cam)
 {
-  GLdouble ax, ay, az;
+  GLdouble ax;
+  GLdouble ay;
+  GLdouble az;
 
   gluUnProject(mx, my, 0, a_cam.ab_glm, a_cam.ab_glp, a_cam.ab_glv, &ax, &ay, &az);
   vec3 m       = vec3((float)ax, (float)ay, (float)az) - a_cam.ab_eye;
@@ -100,7 +102,7 @@ static vec3 sphere_coords(GLdouble mx, GLdouble my, Camera& a_cam)
   GLfloat b    = (a_cam.ab_eye * m);
   GLfloat root = (b * b) - a * (a_cam.ab_zoom2 - a_cam.ab_sphere2);
   if (root <= 0) return edge_coords(m, a_cam);
-  GLfloat t    = (0.0 - b - sqrt(root)) / a;
+  GLfloat t    = (0.0F - b - sqrt(root)) / a;
   return (a_cam.ab_eye + (m * t)).unit();
 }
 
@@ -108,7 +110,9 @@ static vec3 sphere_coords(GLdouble mx, GLdouble my, Camera& a_cam)
 // get intersection with plane for "trackball" style rotation
 static vec3 planar_coords(GLdouble mx, GLdouble my, Camera& a_cam)
 {
-  GLdouble ax, ay, az;
+  GLdouble ax;
+  GLdouble ay;
+  GLdouble az;
 
   gluUnProject(mx, my, 0, a_cam.ab_glm, a_cam.ab_glp, a_cam.ab_glv, &ax, &ay, &az);
   vec3 m    = vec3((float)ax, (float)ay, (float)az) - a_cam.ab_eye;
@@ -127,7 +131,7 @@ void Camera::arcball_setzoom(float radius, vec3 eye, vec3 up)
   ab_zoom        = sqrt(ab_zoom2); // store eye distance
   ab_sphere      = radius; // sphere radius
   ab_sphere2     = ab_sphere * ab_sphere;
-  ab_eyedir      = ab_eye * (1.0 / ab_zoom); // distance to eye
+  ab_eyedir      = ab_eye * (1.0F / ab_zoom); // distance to eye
   ab_edge        = ab_sphere2 / ab_zoom; // plane of visible edge
 
   if (ab_sphere <= 0.0) // trackball mode
@@ -135,7 +139,7 @@ void Camera::arcball_setzoom(float radius, vec3 eye, vec3 up)
     ab_planar    = true;
     ab_up        = up;
     ab_out       = (ab_eyedir ^ ab_up);
-    ab_planedist = (0.0 - ab_sphere) * ab_zoom;
+    ab_planedist = (0.0F - ab_sphere) * ab_zoom;
   }
   else
     ab_planar    = false;
@@ -178,7 +182,7 @@ void Camera::arcball_move(int mx, int my)
     // d is motion since the last position
     vec3 d        = ab_curr - ab_start;
 
-    GLfloat angle = d.length() * 0.5;
+    GLfloat angle = d.length() * 0.5F;
     GLfloat cosa  = cos(angle);
     GLfloat sina  = sin(angle);
     // p is perpendicular to d
@@ -202,8 +206,8 @@ void Camera::arcball_move(int mx, int my)
     // use a dot product to get the angle between them
     // use a cross product to get the vector to rotate around
     GLfloat cos2a = ab_start * ab_curr;
-    GLfloat sina  = sqrt((1.0 - cos2a) * 0.5);
-    GLfloat cosa  = sqrt((1.0 + cos2a) * 0.5);
+    GLfloat sina  = sqrt((1.0F - cos2a) * 0.5F);
+    GLfloat cosa  = sqrt((1.0F + cos2a) * 0.5F);
     vec3 cross    = (ab_start ^ ab_curr).unit() * sina;
     quaternion(ab_next, cross.x, cross.y, cross.z, cosa);
 

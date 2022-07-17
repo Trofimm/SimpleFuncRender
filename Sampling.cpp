@@ -11,13 +11,13 @@ Sampling::Sampling(SamplingMethod& sm) :
 }
 
 
-float Sampling::GetOneRndDigit(const uint32_t a_sobolPos, const int a_SobolDim) const
+float Sampling::GetOneRndDigit(const uint32_t a_pos, const UINT a_SobolDim) const
 {
   switch (m_sampMeth)
   {
   case SamplingMethod::UNIFORM:    return Simple1D();
   case SamplingMethod::STRATIFIED: return Stratified(10);
-  case SamplingMethod::SOBOL:      return rndQmcSobolN(a_sobolPos, a_SobolDim, &m_sobolTable[0][0]);
+  case SamplingMethod::SOBOL:      return rndQmcSobolN(a_pos, a_SobolDim, &m_sobolTable[0][0]);
   default:
     break;
   }
@@ -35,7 +35,7 @@ float Sampling::Simple1D() const
 // hammersley 2d
 //////////////////////////
 
-//float radicalInverse_VdC(unsigned bits)
+//float radicalInverse_VdC(uint32_t bits)
 //{
 //  bits = (bits << 16u) | (bits >> 16u);
 //  bits = ((bits & 0x55555555u) << 1u) | ((bits & 0xAAAAAAAAu) >> 1u);
@@ -45,9 +45,9 @@ float Sampling::Simple1D() const
 //  return float(float(bits) * 2.3283064365386963e-10); // / 0x100000000
 //}
 //
-//vec2 Hammersley2D(unsigned i, unsigned N) 
+//vec2 Hammersley2D(uint32_t pos, uint32_t maxSample)
 //{
-//  return vec2(float(i) / float(N), radicalInverse_VdC(i));
+//  return vec2(float(pos) / float(maxSample), radicalInverse_VdC(pos));
 //}
 
 

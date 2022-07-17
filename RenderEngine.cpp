@@ -19,9 +19,9 @@ void RenderFunction::Render()
 	const int maxDim = 3;
 	std::vector<float> rndNums(3);
 
-	for (int i = 0; i < m_rendSett.m_maxSamples; ++i)
+	for (UINT i = 0; i < m_rendSett.m_maxSamples; ++i)
 	{		
-		for (size_t dim = 0; dim < maxDim; ++dim)
+		for (UINT dim = 0; dim < maxDim; ++dim)
 		{
 			rndNums[dim] = sampling.GetOneRndDigit(i, dim);
 			rndNums[dim] = sampling.GetOneRndDigit(i, dim);

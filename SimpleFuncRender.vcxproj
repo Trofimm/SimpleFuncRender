@@ -168,7 +168,7 @@
   <ItemGroup>
     <ClCompile Include="Brdf.cpp" />
     <ClCompile Include="Camera.cpp" />
-    <ClCompile Include="FreeglutDraw.cpp" />
+    <ClCompile Include="Window.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Math.cpp" />
     <ClCompile Include="RenderEngine.cpp" />
@@ -180,7 +180,6 @@
   <ItemGroup>
     <ClInclude Include="Brdf.h" />
     <ClInclude Include="Camera.h" />
-    <ClInclude Include="FreeglutDraw.h" />
     <ClInclude Include="IRenderEngine.h" />
     <ClInclude Include="IView.h" />
     <ClInclude Include="Math.h" />
@@ -189,6 +188,7 @@
     <ClInclude Include="Scene.h" />
     <ClInclude Include="Sobol\qmc_sobol_niederreiter.h" />
     <ClInclude Include="Viewport.h" />
+    <ClInclude Include="Window.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -23,8 +23,8 @@ float TestGGX(const float alpha, const float theta_o, const float theta, const f
   {
     // angle associated with H
     const float theta_h = acos(h.z);
-    D = 1.0f / pow(1.0f + pow(tan(theta_h) / alpha, 2), 2);
-    D = D / (PI * alpha*alpha * pow(h.z, 4));
+    D = 1.0F / powf(1.0F + powf(tan(theta_h) / alpha, 2.0F), 2.0F);
+    D = D / (PI * alpha*alpha * powf(h.z, 4));
   }
 
     

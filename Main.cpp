@@ -4,20 +4,23 @@
 
 #include "RenderEngine.h"
 #include "Viewport.h"
-#include "FreeglutDraw.h"
+#include "Window.h"
 
 //////////////////////////////////////////////////////////////////////
 
-extern USHORT WINDOW_W = 800;
-extern USHORT WINDOW_H = 600;
 
 int main(int argc, char ** argv)
 {  
+  glutInit(&argc, argv);
+  const auto screenWidth  = (USHORT)(glutGet(GLUT_SCREEN_WIDTH));
+  const auto screenHeight = (USHORT)(glutGet(GLUT_SCREEN_HEIGHT));
+
   Scene scene;
-  scene.LoadScene(Scene_sphere);
+  scene.LoadScene(Scene_SeaShell);
   
   const uint32_t maxSamples = 100000;
-
+  WINDOW_W = (USHORT)(screenWidth * 0.7F);
+  WINDOW_H = (USHORT)(screenHeight * 0.9F);
   RenderSettings   rendSett(WINDOW_W, WINDOW_H, maxSamples, SamplingMethod::SOBOL);
   ViewportSettings viewSett(WINDOW_W, WINDOW_H);
 
@@ -26,9 +29,9 @@ int main(int argc, char ** argv)
   viewport.Draw();
 
 
-  glutInit(&argc, argv);
+
   glutInitWindowSize(WINDOW_W, WINDOW_H);
-  glutInitWindowPosition((2048 - WINDOW_W)/2, (1024 - WINDOW_H)/2);
+  glutInitWindowPosition((screenWidth - WINDOW_W)/2, (screenHeight - WINDOW_H)/2);
   glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH);
   
   glutCreateWindow("Simple render");
