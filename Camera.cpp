@@ -193,7 +193,6 @@ void Camera::arcball_move(int mx, int my)
     // planar style only ever relates to the last point
     quatcopy(ab_last, ab_quat);
     ab_start      = ab_curr;
-
   }
   else {
     ab_curr       = sphere_coords((GLdouble)mx, (GLdouble)my, *this);

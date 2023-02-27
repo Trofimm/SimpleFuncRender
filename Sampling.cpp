@@ -1,6 +1,10 @@
 #include "Sampling.h"
+#include <random>
 
 ////////////////////////////////////////////////////////////////////////
+
+std::random_device rd;
+std::mt19937 engine(rd());
 
 
 Sampling::Sampling(SamplingMethod& sm) :
@@ -28,7 +32,9 @@ float Sampling::GetOneRndDigit(const uint32_t a_pos, const UINT a_SobolDim) cons
 
 float Sampling::Simple1D() const
 {
-  return (float)(rand() % RAND_MAX) / (float)RAND_MAX;
+  std::uniform_real_distribution<> distr(0.0f, 1.0f);
+  return (float)(distr(engine));
+  //return (float)(rand() % RAND_MAX) / (float)RAND_MAX;
 }
 
 //////////////////////////
@@ -58,18 +64,21 @@ float Sampling::Simple1D() const
 
 float RandCell(const uint32_t numCell)
 {
-  return (rand() % numCell) / (float)numCell;
+  std::uniform_int_distribution<> distr(0, numCell);
+  return (float)(distr(engine)) / (float)numCell;
+  //return (rand() % numCell) / (float)numCell;
 }
 
 
 void RandomCellArray(std::vector<float>& a_array)
 {
-  const auto sizeArray = a_array.size();
+  const auto sizeArray = (int)(a_array.size());
+  std::uniform_int_distribution<> rnd(0, sizeArray);
 
   for (int i = 0; i < sizeArray; i++)
   {
-    const int numCell1 = rand() % sizeArray;
-    const int numCell2 = rand() % sizeArray;
+    const int numCell1 = rnd(engine);// rand() % sizeArray;
+    const int numCell2 = rnd(engine);// rand() % sizeArray;
     const float a      = a_array[numCell1];
     const float b      = a_array[numCell2];
     a_array[numCell1]  = b;

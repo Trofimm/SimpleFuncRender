@@ -7,5 +7,4 @@ public:
   virtual ~IRenderEngine() = default;
 
   virtual void Render() = 0;
-
 };

@@ -89,7 +89,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <IncludePath>freeglut/include/GL;$(IncludePath)</IncludePath>
-    <LibraryPath>freeglut/lib/Release;$(LibraryPath)</LibraryPath>
+    <LibraryPath>freeglut/lib;$(LibraryPath)</LibraryPath>
     <ExecutablePath>freeglut/bin/Release;$(ExecutablePath)</ExecutablePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
